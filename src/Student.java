@@ -1,8 +1,5 @@
-public class Student {
+public class Student extends  Person {
     private  int id;
-    private  String name;
-    private  String familyName;
-    private  int age;
     private  int group;
     private  int tasksFinished;
     private  int currentModule;
@@ -12,20 +9,13 @@ public class Student {
     public   static final int MAX_MODULE = 10;
 
     public Student(String name, String familyName, int age) {
-        this(0, 0, 0, 0, false);
-        this.name = name;
-        this.familyName = familyName;
-        this.age = age;
-    }
-
-    public Student(int id, int group, int tasksFinished, int currentModule, boolean experience) {
+        super(name, familyName, age);
         this.id = id;
         this.group = group;
         this.tasksFinished = tasksFinished;
         this.currentModule = currentModule;
         this.experience = experience;
     }
-
 
     public void doTask (){
         System.out.println("Task completed!");
