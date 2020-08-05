@@ -18,7 +18,7 @@ public class Student extends  Person {
     }
 
     public void doTask (){
-        System.out.println("Task completed!");
+        System.out.println("taskTypes.Task completed!");
         maxModuleOfAllStudents++;
         allCompletedTasks++;
         tasksFinished++;
