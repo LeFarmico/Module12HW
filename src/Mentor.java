@@ -19,4 +19,13 @@ public class Mentor extends Person {
     public static void giveMotivation(){
 
     }
+
+    @Override
+    public String toString() {
+        return "Mentor{" +
+                "name='" + getName() + '\'' +
+                ", familyName='" + getFamilyName() + '\'' +
+                ", age=" + getAge() +
+                '}';
+    }
 }

@@ -15,4 +15,13 @@ public class Curator extends Person {
     public static void giveMotivation(){
 
     }
+
+    @Override
+    public String toString() {
+        return "Curator{" +
+                "name='" + getName() + '\'' +
+                ", familyName='" + getFamilyName() + '\'' +
+                ", age=" + getAge() +
+                '}';
+    }
 }
