@@ -39,7 +39,7 @@ public class Student extends  Person {
         for (int i = completedTasks; i < tasks.length; i++) {
             solveTask(tasks[completedTasks+1]);
         }
-        allTasksCompleted = completedTasks == tasks.length;
+        allTasksCompleted = (completedTasks == tasks.length);
     }
 
     @Override
