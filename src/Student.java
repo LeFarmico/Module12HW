@@ -1,94 +1,93 @@
+import taskTypes.DragAndDrop;
+import taskTypes.Task;
+import taskTypes.Test;
+import taskTypes.WriteCode;
+
 import java.util.Objects;
 
 public class Student extends  Person {
-    private  int courseName;
-    private  int group;
-    private  int tasksFinished;
-    private  int currentModule;
-    private  boolean experience;
-    private  static int allCompletedTasks;
-    private  static int maxModuleOfAllStudents;
-    public   static final int MAX_MODULE = 10;
 
-    public Student(String name, String familyName, int age) {
+    private  int completedTasks;
+    private  static int totalTasksCompleted;
+    private  boolean allTasksCompleted;
+    private  Mentor mentor;
+
+    public Student(String name, String familyName, int age, Mentor mentor) {
         super(name, familyName, age);
-        this.courseName = courseName;
-        this.group = group;
-        this.tasksFinished = tasksFinished;
-        this.currentModule = currentModule;
-        this.experience = experience;
+        this.completedTasks = 0;
+        this.mentor = mentor;
     }
 
-    public void doTask (){
-        System.out.println("taskTypes.Task completed!");
-        maxModuleOfAllStudents++;
-        allCompletedTasks++;
-        tasksFinished++;
-
-    }
-    private static void askQuestion (){
-        //Method's body
-    }
-    private void completeModule (){
-        if (currentModule < MAX_MODULE){
-            currentModule++;
-            System.out.println("Module completed!");
+    private void solveTask (Task task){
+        if((task instanceof Test) || (task instanceof DragAndDrop)){
+            System.out.println("Задание " + task.getNumber() + " выполнено!");
+            completedTasks++;
+            totalTasksCompleted++;
         }
-        else System.out.println("All modules completed!");
-
-        if (maxModuleOfAllStudents < currentModule)
-            maxModuleOfAllStudents = currentModule;
-    }
-    private static void connectToMentor (){
-        //Method's body
-    }
-    private static void findTask (){
-        //Method's body
-    }
-
-    private static void connectToClassmate (){
-        //Method's body
+        else if (task instanceof WriteCode){
+            while (true) {
+                if (mentor.checkCode(task)) {
+                    completedTasks++;
+                    totalTasksCompleted++;
+                    break;
+                }
+            }
+        }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Student)) return false;
-        Student student = (Student) o;
-        return courseName == student.courseName &&
-                experience == student.experience &&
-                getName().equals(student.getName()) &&
-                getFamilyName().equals(student.getFamilyName()) &&
-                getAge() == student.getAge();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(courseName, experience, getName(), getFamilyName(), getAge());
-    }
-
-    public static void main(String[] args) {
-        Student student1 = new Student("Федя", "Бобров", 32);
-        Student student2 = new Student("Федя", "Бобров", 32);
-
-        long s1Hash = student1.hashCode();
-        long s2Hash = student2.hashCode();
-        System.out.println(s1Hash + " " + s2Hash);
-        System.out.println(student1.equals(student2));
-        System.out.println(student1.toString());
+    public void solveTasks(int numberOfTasksToComplete, Task[] tasks){
+        System.out.println("Надо решить: " + numberOfTasksToComplete + " задач из: " + tasks.length);
+        if (numberOfTasksToComplete > tasks.length){
+            System.out.println("Задач должно быть меньше чем " + tasks.length);
+        }
+        else {
+            for (int i = 0; i < numberOfTasksToComplete; i++) {
+                solveTask(tasks[i]);
+            }
+            allTasksCompleted = (completedTasks == tasks.length);
+        }
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "courseName=" + courseName +
-                ", group=" + group +
-                ", tasksFinished=" + tasksFinished +
-                ", currentModule=" + currentModule +
-                ", experience=" + experience +
+                ", completedTasks=" + completedTasks +
                 ", name=" + getName() +
                 ", familyName=" + getFamilyName() +
                 ", age=" + getAge() +
+                ", mentor=" + mentor +
                 '}';
+    }
+
+    public int getCompletedTasks() {
+        return completedTasks;
+    }
+
+    public static int getTotalTasksCompleted() {
+        return totalTasksCompleted;
+    }
+
+    public boolean isAllTasksCompleted() {
+        return allTasksCompleted;
+    }
+
+    public Mentor getMentor() {
+        return mentor;
+    }
+
+    public void setCompletedTasks(int completedTasks) {
+        this.completedTasks = completedTasks;
+    }
+
+    public static void setTotalTasksCompleted(int totalTasksCompleted) {
+        Student.totalTasksCompleted = totalTasksCompleted;
+    }
+
+    public void setAllTasksCompleted(boolean allTasksCompleted) {
+        this.allTasksCompleted = allTasksCompleted;
+    }
+
+    public void setMentor(Mentor mentor) {
+        this.mentor = mentor;
     }
 }

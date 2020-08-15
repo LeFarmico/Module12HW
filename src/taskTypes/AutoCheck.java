@@ -1,5 +1,7 @@
 package taskTypes;
 
 public interface AutoCheck {
-    void checkAutomatically();
+    default void checkAutomatically() {
+        System.out.println("Задание выполнено!");
+    }
 }
