@@ -1,13 +1,15 @@
 package taskTypes;
 
 public class DragAndDrop extends Task implements AutoCheck{
-    @Override
-    public void checkAutomatically() {
 
-    }
+    String[][] variants;
 
-    @Override
-    public String toString() {
-        return "DragAndDrop{}";
+    public DragAndDrop() {
+        super();
+        this.variants = new String[][]{
+                {"a", "1"},
+                {"b", "3"},
+                {"c", "2"},
+        };
     }
 }

@@ -1,13 +1,11 @@
 package taskTypes;
 
 public class Test extends Task implements AutoCheck{
-    @Override
-    public void checkAutomatically() {
-        
-    }
 
-    @Override
-    public String toString() {
-        return "Test{}";
+    String[] answers;
+
+    public Test() {
+        super();
+        this.answers = new String[]{"a", "b", "c"};
     }
 }
