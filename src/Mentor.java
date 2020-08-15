@@ -25,11 +25,11 @@ public class Mentor extends Person implements Staff {
         setGoodMood(randomNumber > 1000);
 
         if (!goodMood) {
-            System.out.println("Задача" + task.getNumber() + "не принята!");
+            System.out.println("Задача " + task.getNumber() + " не принята!");
             return false;
         }
         else {
-            System.out.println("Задача" + task.getNumber() + " принята!");
+            System.out.println("Задача " + task.getNumber() + " принята!");
             return true;
         }
     }

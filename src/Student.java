@@ -20,41 +20,32 @@ public class Student extends  Person {
 
     private void solveTask (Task task){
         if((task instanceof Test) || (task instanceof DragAndDrop)){
-            System.out.println("Задание выполнено!");
+            System.out.println("Задание " + task.getNumber() + " выполнено!");
             completedTasks++;
             totalTasksCompleted++;
         }
         else if (task instanceof WriteCode){
-            if(mentor.checkCode(task)){
-                System.out.println("Задание зачтено!");
-                completedTasks++;
-                totalTasksCompleted++;
+            while (true) {
+                if (mentor.checkCode(task)) {
+                    completedTasks++;
+                    totalTasksCompleted++;
+                    break;
+                }
             }
-            else mentor.checkCode(task);
-            // Как отправлять повторно? Отдельный метод?
         }
     }
 
-    public void solveTasks(int numberOfTasks, Task[] tasks){
-        for (int i = completedTasks; i < tasks.length; i++) {
-            solveTask(tasks[completedTasks+1]);
+    public void solveTasks(int numberOfTasksToComplete, Task[] tasks){
+        System.out.println("Надо решить: " + numberOfTasksToComplete + " задач из: " + tasks.length);
+        if (numberOfTasksToComplete > tasks.length){
+            System.out.println("Задач должно быть меньше чем " + tasks.length);
         }
-        allTasksCompleted = (completedTasks == tasks.length);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Student)) return false;
-        Student student = (Student) o;
-        return  getName().equals(student.getName()) &&
-                getFamilyName().equals(student.getFamilyName()) &&
-                getAge() == student.getAge();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getFamilyName(), getAge());
+        else {
+            for (int i = 0; i < numberOfTasksToComplete; i++) {
+                solveTask(tasks[i]);
+            }
+            allTasksCompleted = (completedTasks == tasks.length);
+        }
     }
 
     @Override
